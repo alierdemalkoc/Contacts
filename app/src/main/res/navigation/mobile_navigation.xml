@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.alierdemalkoc.contacts.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/homeToAdd"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/homeToDetail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_friends"
+        android:name="com.alierdemalkoc.contacts.ui.friends.FriendsFragment"
+        android:label="@string/menu_friends"
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/friendsToDetail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_society"
+        android:name="com.alierdemalkoc.contacts.ui.society.SocietyFragment"
+        android:label="@string/menu_society"
+        tools:layout="@layout/fragment_society" >
+        <action
+            android:id="@+id/societyToDetail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_family"
+        android:name="com.alierdemalkoc.contacts.ui.family.FamilyFragment"
+        android:label="@string/menu_family"
+        tools:layout="@layout/fragment_family" >
+        <action
+            android:id="@+id/familyToDetail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_work"
+        android:name="com.alierdemalkoc.contacts.ui.work.WorkFragment"
+        android:label="@string/menu_work"
+        tools:layout="@layout/fragment_work" >
+        <action
+            android:id="@+id/workToDetail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.alierdemalkoc.contacts.ui.add.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/addToHome"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.alierdemalkoc.contacts.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/detailToHome"
+            app:destination="@id/nav_home" />
+    </fragment>
+</navigation>
