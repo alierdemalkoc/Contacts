@@ -38,7 +38,7 @@ class WorkFragment : Fragment() {
 
         listView = binding.workListView
 
-        CoroutineScope(Dispatchers.IO).launch{
+      /*  CoroutineScope(Dispatchers.IO).launch{
             contactList.clear()
             val listDb = AppDatabase.getInstance(requireContext()).contactDao().findByGroups("İş")
             for (contact in listDb){
@@ -47,7 +47,7 @@ class WorkFragment : Fragment() {
                 listView.adapter = adapter
             }
         }
-
+*/
         listView.setOnItemClickListener { adapterView, view, i, l ->
             val bundle = Bundle()
             contactList[i].nid?.let { bundle.putInt("id", it) }

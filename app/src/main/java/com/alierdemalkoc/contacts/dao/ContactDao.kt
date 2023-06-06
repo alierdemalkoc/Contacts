@@ -7,25 +7,25 @@ import com.alierdemalkoc.contacts.model.Contact
 interface ContactDao {
 
     @Insert
-    fun insert (contact: Contact) : Long
+    suspend fun add(contact: Contact) : Long
 
     @Query("select * from contact")
-    fun getAll() : List<Contact>
+    suspend fun getAll() : List<Contact>
 
     @Query("select * from contact where nameSurname like :name")
-    fun searchName(name: String?) : List<Contact>
+    suspend fun searchName(name: String?) : List<Contact>
 
     @Query("select * from contact where nid =:nid")
-    fun findById(nid: Int) : Contact
+    suspend fun findById(nid: Int) : Contact
 
     @Query("select * from contact where groups =:groups")
-    fun findByGroups(groups: String) : List<Contact>
+    suspend fun findByGroups(groups: String) : List<Contact>
 
     @Delete
-    fun delete(contact: Contact)
+    suspend fun delete(contact: Contact)
 
     @Update
-    fun update(contact: Contact)
+    suspend fun update(contact: Contact)
 
 
 }

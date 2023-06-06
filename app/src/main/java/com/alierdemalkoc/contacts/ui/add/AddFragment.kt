@@ -52,7 +52,7 @@ class AddFragment : Fragment() {
         val dropdownAdapter = DropdownAdapter(requireActivity(), listOf("Aile", "İş", "Dernek", "Arkadaşlar"))
         autoCompleteTextView.setAdapter(dropdownAdapter)
 
-        addButton.setOnClickListener {
+      /*  addButton.setOnClickListener {
             it.hideKeyboard()
             if (nameSurnameText.text.toString() != "" && phoneText.text.toString() != "" && autoCompleteTextView.text.toString() != "" && regionText.text.toString() != ""){
                 CoroutineScope(Dispatchers.IO).launch {
@@ -70,7 +70,7 @@ class AddFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please Insert", Toast.LENGTH_LONG).show()
             }
 
-        }
+        }*/
 
 
 

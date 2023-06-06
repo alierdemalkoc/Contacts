@@ -39,7 +39,7 @@ class FamilyFragment : Fragment() {
 
         listView = binding.familyListView
 
-        CoroutineScope(Dispatchers.IO).launch{
+       /* CoroutineScope(Dispatchers.IO).launch{
             contactList.clear()
             val listDb = AppDatabase.getInstance(requireContext()).contactDao().findByGroups("Aile")
             for (contact in listDb){
@@ -47,7 +47,7 @@ class FamilyFragment : Fragment() {
                 val adapter = CustomContactAdapter(requireActivity(), contactList)
                 listView.adapter = adapter
             }
-        }
+        }*/
 
         listView.setOnItemClickListener { adapterView, view, i, l ->
             val bundle = Bundle()

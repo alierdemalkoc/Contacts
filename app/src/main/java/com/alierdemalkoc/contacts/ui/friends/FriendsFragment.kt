@@ -37,7 +37,7 @@ class FriendsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         listView = binding.friendsListView
 
-        CoroutineScope(Dispatchers.IO).launch{
+     /*   CoroutineScope(Dispatchers.IO).launch{
             contactList.clear()
             val listDb = AppDatabase.getInstance(requireContext()).contactDao().findByGroups("Arkadaşlar")
             for (contact in listDb){
@@ -46,7 +46,7 @@ class FriendsFragment : Fragment() {
                 listView.adapter = adapter
             }
         }
-
+*/
         listView.setOnItemClickListener { adapterView, view, i, l ->
             val bundle = Bundle()
             contactList[i].nid?.let { bundle.putInt("id", it) }

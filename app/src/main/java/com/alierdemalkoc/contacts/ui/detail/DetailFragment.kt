@@ -67,7 +67,7 @@ class DetailFragment : Fragment() {
         autoCompleteTextView.setAdapter(dropdownAdapter)
 
         val id = arguments?.getInt("id")
-        CoroutineScope(Dispatchers.IO).launch {
+     /*   CoroutineScope(Dispatchers.IO).launch {
 
             val contact = id?.let { AppDatabase.getInstance(requireContext()).contactDao().findById(it) }
             Log.d("contact", contact.toString())
@@ -75,7 +75,7 @@ class DetailFragment : Fragment() {
             phoneText.setText(contact.number)
             regionText.setText(contact.region)
             groupText.text = (contact.groups)
-        }
+        }*/
 
         editButton.setOnClickListener {
             editButton.visibility = View.GONE
@@ -86,7 +86,7 @@ class DetailFragment : Fragment() {
 
         }
 
-        updateButton.setOnClickListener {
+     /*   updateButton.setOnClickListener {
             if (nameSurnameText.text.toString() != "" && phoneText.text.toString() != "" && autoCompleteTextView.text.toString() != "" && regionText.text.toString() != "") {
                 CoroutineScope(Dispatchers.IO).launch {
                     val contact = Contact(
@@ -117,7 +117,7 @@ class DetailFragment : Fragment() {
             }
             Toast.makeText(requireContext(), "Başarıyla Silinmiştir", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.detailToHome)
-        }
+        }*/
 
     }
 }

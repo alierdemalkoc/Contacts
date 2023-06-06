@@ -38,7 +38,7 @@ class SocietyFragment : Fragment() {
 
         listView = binding.societyListView
 
-        CoroutineScope(Dispatchers.IO).launch{
+      /*  CoroutineScope(Dispatchers.IO).launch{
             contactList.clear()
             val listDb = AppDatabase.getInstance(requireContext()).contactDao().findByGroups("Dernek")
             for (contact in listDb){
@@ -47,7 +47,7 @@ class SocietyFragment : Fragment() {
                 listView.adapter = adapter
             }
         }
-
+*/
         listView.setOnItemClickListener { adapterView, view, i, l ->
             val bundle = Bundle()
             contactList[i].nid?.let { bundle.putInt("id", it) }
