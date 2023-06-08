@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.alierdemalkoc.contacts.dao.ContactDao
 import com.alierdemalkoc.contacts.model.Contact
 
-@Database(entities = [Contact::class], version = 1)
+@Database(entities = [Contact::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun contactDao(): ContactDao

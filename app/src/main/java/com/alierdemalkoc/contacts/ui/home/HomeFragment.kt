@@ -1,6 +1,5 @@
 package com.alierdemalkoc.contacts.ui.home
 
-import android.media.CamcorderProfile.getAll
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,16 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alierdemalkoc.contacts.R
 import com.alierdemalkoc.contacts.adapter.CustomContactAdapter
-import com.alierdemalkoc.contacts.config.AppDatabase
 import com.alierdemalkoc.contacts.databinding.FragmentHomeBinding
 import com.alierdemalkoc.contacts.model.Contact
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
     private val viewModel: HomeViewModel by viewModels()
 
     private var _binding: FragmentHomeBinding? = null
@@ -30,9 +26,9 @@ class HomeFragment : Fragment() {
     lateinit var addButton: FloatingActionButton
     lateinit var listView: ListView
     lateinit var searchView: SearchView
-    var contactList = mutableListOf<Contact>()
-    var searchList = mutableListOf<Contact>()
-    lateinit var listDb: List<Contact>
+    lateinit var adapter: CustomContactAdapter
+    var contactAllList = arrayListOf<Contact>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,18 +38,24 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         searchView = binding.searchView
         listView = binding.contactListView
-        val adapter = viewModel.carList.value?.let { CustomContactAdapter(requireActivity(), it) }
+        adapter = CustomContactAdapter(requireActivity(), contactAllList)
         listView.adapter = adapter
+        viewModel.contactList.observe(viewLifecycleOwner){
+            contactAllList.addAll(it)
+            Log.d("asd", contactAllList.toString())
+            adapter.notifyDataSetChanged()
+        }
 
-        listView.setOnItemClickListener { adapterView, view, i, l ->
+
+
+       listView.setOnItemClickListener { adapterView, view, i, l ->
             val bundle = Bundle()
-            contactList[i].nid?.let { bundle.putInt("id", it) }
+            contactAllList[i].nid?.let { bundle.putInt("id", it) }
             findNavController().navigate(R.id.homeToDetail, bundle)
         }
         addButton = binding.fab

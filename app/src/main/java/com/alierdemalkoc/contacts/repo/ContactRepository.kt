@@ -7,13 +7,14 @@ import javax.inject.Inject
 
 class ContactRepository @Inject constructor(
     private val contactDao: ContactDao
-)
-{
-    var contactList: MutableLiveData<List<Contact>> = MutableLiveData()
+    ) {
+    val contactList: MutableLiveData<List<Contact>> = MutableLiveData()
 
     suspend fun getAllContact() {
         contactList.postValue(contactDao.getAll())
     }
+
+    fun returnContactList(): MutableLiveData<List<Contact>> = contactList
 
     suspend fun addContact(contact: Contact) = contactDao.add(contact)
 

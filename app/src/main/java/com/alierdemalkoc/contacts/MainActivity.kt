@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.alierdemalkoc.contacts.config.AppDatabase
 import com.alierdemalkoc.contacts.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

@@ -12,10 +12,11 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val contactRepository: ContactRepository) : ViewModel(){
 
-    val carList: LiveData<List<Contact>> = contactRepository.contactList
+    var contactList: LiveData<List<Contact>> = contactRepository.contactList
 
     init {
         getAllCar()
+        contactList = contactRepository.returnContactList()
     }
     private fun getAllCar(){
         viewModelScope.launch {

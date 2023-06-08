@@ -2,7 +2,7 @@ package com.alierdemalkoc.contacts.ui.add
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,19 +11,20 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alierdemalkoc.contacts.R
 import com.alierdemalkoc.contacts.adapter.DropdownAdapter
-import com.alierdemalkoc.contacts.config.AppDatabase
 import com.alierdemalkoc.contacts.databinding.FragmentAddBinding
 import com.alierdemalkoc.contacts.model.Contact
+import com.alierdemalkoc.contacts.ui.home.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddFragment : Fragment() {
+    private val viewModel: AddViewModel by viewModels()
+
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
     lateinit var nameSurnameText: EditText
@@ -52,27 +53,33 @@ class AddFragment : Fragment() {
         val dropdownAdapter = DropdownAdapter(requireActivity(), listOf("Aile", "İş", "Dernek", "Arkadaşlar"))
         autoCompleteTextView.setAdapter(dropdownAdapter)
 
-      /*  addButton.setOnClickListener {
+        addButton.setOnClickListener {
             it.hideKeyboard()
-            if (nameSurnameText.text.toString() != "" && phoneText.text.toString() != "" && autoCompleteTextView.text.toString() != "" && regionText.text.toString() != ""){
-                CoroutineScope(Dispatchers.IO).launch {
-                    val contact = Contact(null, nameSurnameText.text.toString(), phoneText.text.toString(), autoCompleteTextView.text.toString(),regionText.text.toString())
-                    AppDatabase.getInstance(requireContext()).contactDao().insert(contact)
-                    val list = AppDatabase.getInstance(requireContext()).contactDao().getAll()
-                    Log.d("list", list.toString())
-                    Snackbar.make(view, "Başarıyla eklendi", Snackbar.LENGTH_LONG)
-                        .setAction("Anasayfaya Dön", View.OnClickListener {
-                            findNavController().navigate(R.id.addToHome)
-                        }).show()
-                }
-
-            } else {
-                Toast.makeText(requireContext(), "Please Insert", Toast.LENGTH_LONG).show()
+            if (TextUtils.isEmpty(nameSurnameText.text.toString())){
+                binding.nameSurname.error = "Please Insert Name and Surname"
+                return@setOnClickListener
+            } else if (TextUtils.isEmpty(phoneText.text.toString())){
+                binding.phone.error = "Please Insert Phone"
+                return@setOnClickListener
+            }
+            else if (TextUtils.isEmpty(regionText.text.toString())){
+                binding.region.error = "Please Insert Region"
+                return@setOnClickListener
+            }
+            else if (TextUtils.isEmpty(autoCompleteTextView.text.toString())){
+                binding.group.error = "Please Select Group"
+                return@setOnClickListener
+            }
+            else{
+                val contact = Contact(null, nameSurnameText.text.toString(), phoneText.text.toString(), autoCompleteTextView.text.toString(),regionText.text.toString())
+                viewModel.addContact(contact)
+                Snackbar.make(view, "Başarıyla eklendi", Snackbar.LENGTH_LONG)
+                    .setAction("Anasayfaya Dön", View.OnClickListener {
+                        findNavController().navigate(R.id.addToHome)
+                    }).show()
             }
 
-        }*/
-
-
+        }
 
     }
 
